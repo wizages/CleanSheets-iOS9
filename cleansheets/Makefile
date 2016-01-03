@@ -1,10 +1,11 @@
 include $(THEOS)/makefiles/common.mk
 
-BUNDLE_NAME = CleanSheets
-CleanSheets_FILES = cleansheetsRootListController.m SKPersonCell.m
-CleanSheets_INSTALL_PATH = /Library/PreferenceBundles
-CleanSheets_FRAMEWORKS = UIKit Social
-CleanSheets_PRIVATE_FRAMEWORKS = Preferences
+BUNDLE_NAME = CleanSheets9
+CleanSheets9_FILES = cleansheetsRootListController.m $(wildcard *.m)
+CleanSheets9_INSTALL_PATH = /Library/PreferenceBundles
+CleanSheets9_FRAMEWORKS = UIKit Social
+CleanSheets9_PRIVATE_FRAMEWORKS = Preferences
+CleanSheets9_EXTRA_FRAMEWORKS += CepheiPrefs
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 

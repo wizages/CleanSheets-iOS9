@@ -1,10 +1,5 @@
 
 #include "cleansheetsMakersListController.h"
-
-#import <Social/SLComposeViewController.h>
-#import <Social/SLServiceTypes.h>
-#import <Preferences/PSSpecifier.h>
-#import <Preferences/PSListController.h>
 #import "Generic.h"
 #import "SKPersonCell.h"
 
@@ -12,7 +7,7 @@
 
 - (NSArray *)specifiers {
     if (!_specifiers) {
-        _specifiers = [[self loadSpecifiersFromPlistName:@"Credits.plist" target:self] retain];
+        _specifiers = [[self loadSpecifiersFromPlistName:@"Credits" target:self] retain];
     }
     return _specifiers;
 }
@@ -56,7 +51,7 @@
 -(NSString*)personDescription { return @"Developer"; }
 -(NSString*)name { return @"Wizages"; }
 -(NSString*)twitterHandle { return @"Wizages"; }
--(NSString*)imageName { return @"images/Wizages.png"; }
+-(NSString*)imageName { return @"Icon/Wizages.png"; }
 @end
 
 @interface ConceptPersonCell : SKPersonCell
@@ -65,5 +60,5 @@
 -(NSString*)personDescription { return @"Developer"; }
 -(NSString*)name { return @"Buzzeh"; }
 -(NSString*)twitterHandle { return @"iBuzzeh"; }
--(NSString*)imageName { return @"images/Buzzeh.png"; }
+-(NSString*)imageName { return @"Icon/Buzzeh.png"; }
 @end

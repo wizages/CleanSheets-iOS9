@@ -1,5 +1,7 @@
-#import <Preferences/PSListController.h>
+#import <CepheiPrefs/HBRootListController.h>
+#import <MessageUI/MessageUI.h>
 
-@interface cleansheetsRootListController : PSListController
-
+@interface cleansheetsRootListController : HBRootListController
+-(void)setupHeader;
+-(void)setupTitle;
 @end

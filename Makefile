@@ -1,11 +1,12 @@
 include $(THEOS)/makefiles/common.mk
 
-TWEAK_NAME = CleanSheets
-CleanSheets_FILES = tweak.xm
+TWEAK_NAME = CleanSheets9
+CleanSheets9_FILES = tweak.xm
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
-CleanSheets_FRAMEWORKS= UIKIT
+CleanSheets9_FRAMEWORKS= UIKIT
+CleanSheets9_EXTRA_FRAMEWORKS += Cephei
 SHARED_CFLAGS = -fobjc-arc
 
 SUBPROJECTS += cleansheets
