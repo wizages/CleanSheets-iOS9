@@ -31,12 +31,20 @@ static CGFloat conRadius = 15.0f;
 -(id)visualStyleForAlertControllerStyle:(long long)arg1 traitCollection:(id)arg2 descriptor:(id)arg3{
 	if (isActivity && enabled)
 		arg1 = 0;
+
 	return %orig;
 }
 
 -(int) preferredStyle 
 {
-	if(enabled)
+	NSString *bundleName = [[NSBundle mainBundle] bundleIdentifier];
+	if( ( [bundleName isEqualToString:@"com.tapbots.Tweetbot4"]) 
+	 && ( enabled
+	  &&  isActivity
+	  &&  [[[self.actions valueForKey:@"description"] componentsJoinedByString:@""] containsString:@"Cancel"] )
+	  )
+		return 0;
+	else if(enabled)
 		return 1;
 	else
 		return %orig;
@@ -56,6 +64,7 @@ static CGFloat conRadius = 15.0f;
 	//[self.view logViewHierarchy];
 	%orig;
 	if(enabled){
+
 		CGRect screenRect = [[UIScreen mainScreen] bounds];
 		CGFloat screenWidth = screenRect.size.width;
 		if (isActivity)
@@ -133,6 +142,7 @@ static CGFloat conRadius = 15.0f;
 	CGFloat screenWidth = screenRect.size.width;
 	CGFloat screenHeight = screenRect.size.height;
 	%orig;
+
 	if(enabled)
 		self.view.frame = CGRectMake(self.view.frame.origin.x, (screenHeight-self.view.frame.size.height)/2 , screenWidth, self.view.frame.size.height);
 }
