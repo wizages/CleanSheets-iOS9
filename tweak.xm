@@ -13,12 +13,14 @@
 *	See the License for the specific language governing permissions and
 *	limitations under the License.
 */
+#import <Cephei/HBPreferences.h>
 
-static bool seperators = true;
-static bool enabled = true;
-static bool isActivity = false;
-static bool customRadius = true;
-static bool tapDismiss = true;
+static BOOL seperators = true;
+static BOOL enabled = true;
+static BOOL isActivity = false;
+static BOOL customRadius = true;
+static BOOL tapDismiss = true;
+static CGFloat conRadius = 15.0f;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 * Hook into UIAlertController																			 		     *
@@ -64,7 +66,6 @@ static bool tapDismiss = true;
 - (void)viewWillAppear:(BOOL)arg1{
 	%orig;
 	if (enabled && customRadius){
-		CGFloat conRadius = 10.0f;
 		for (UIView *subview in [self.view subviews])
 		{
 			for (UIView *subview2 in [subview subviews])
@@ -137,21 +138,23 @@ static bool tapDismiss = true;
 }
 %end
 
-
 static void loadPrefs()
 {
-    NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.wizages.cleansheets.plist"];
+    HBPreferences *prefs =  [[HBPreferences alloc] initWithIdentifier:@"com.dopeteam.cleansheets9"];
     if(prefs)
     {
-        seperators = ( [prefs objectForKey:@"seperators_hide"] ? [[prefs objectForKey:@"seperators_hide"] boolValue] : seperators );
-        enabled =  ( [prefs objectForKey:@"enabled"] ? [[prefs objectForKey:@"enabled"] boolValue] :enabled );
+        [prefs registerBool:&enabled default:true forKey:@"enabled"];
+        [prefs registerBool:&seperators default:true forKey:@"seperators_hide"];
+        [prefs registerBool:&customRadius default:true forKey:@"customCorners"];
+        [prefs registerBool:&tapDismiss default:true forKey:@"tapDismiss"];
+        [prefs registerFloat:&conRadius default:15.0f forKey:@"radius"];
     }
     [prefs release];
 }
 
 %ctor 
 {
-    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)loadPrefs, CFSTR("com.wizages.cleansheets/settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)loadPrefs, CFSTR("com.dopeteam.cleansheets9/settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
     loadPrefs();
 }
 
