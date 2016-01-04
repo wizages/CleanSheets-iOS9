@@ -29,7 +29,8 @@ static CGFloat conRadius = 15.0f;
 %hook UIAlertController
 
 -(id)visualStyleForAlertControllerStyle:(long long)arg1 traitCollection:(id)arg2 descriptor:(id)arg3{
-	if (isActivity && enabled)
+	NSString *bundleName = [[NSBundle mainBundle] bundleIdentifier];
+	if (isActivity && enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]))
 		arg1 = 0;
 
 	return %orig;
@@ -44,7 +45,7 @@ static CGFloat conRadius = 15.0f;
 	  &&  [[[self.actions valueForKey:@"description"] componentsJoinedByString:@""] containsString:@"Cancel"] )
 	  )
 		return 0;
-	else if(enabled)
+	else if(enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]))
 		return 1;
 	else
 		return %orig;
@@ -63,7 +64,8 @@ static CGFloat conRadius = 15.0f;
 	
 	//[self.view logViewHierarchy];
 	%orig;
-	if(enabled){
+	NSString *bundleName = [[NSBundle mainBundle] bundleIdentifier];
+	if(enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"])){
 
 		CGRect screenRect = [[UIScreen mainScreen] bounds];
 		CGFloat screenWidth = screenRect.size.width;
@@ -142,8 +144,8 @@ static CGFloat conRadius = 15.0f;
 	CGFloat screenWidth = screenRect.size.width;
 	CGFloat screenHeight = screenRect.size.height;
 	%orig;
-
-	if(enabled)
+	NSString *bundleName = [[NSBundle mainBundle] bundleIdentifier];
+	if(enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]))
 		self.view.frame = CGRectMake(self.view.frame.origin.x, (screenHeight-self.view.frame.size.height)/2 , screenWidth, self.view.frame.size.height);
 }
 %end
