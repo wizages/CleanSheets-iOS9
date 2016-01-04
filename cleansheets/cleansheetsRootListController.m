@@ -18,11 +18,11 @@
 }
 
 + (UIColor *)hb_tintColor {
-    return [UIColor colorWithRed:0.17 green:0.24 blue:0.31 alpha:1.0];
+    return [UIColor colorWithRed:0.25 green:0.08 blue:0.35 alpha:1.0];
 }
 
 + (UIColor *)hb_navigationBarTintColor {
-    return [UIColor colorWithRed:0.17 green:0.24 blue:0.31 alpha:1.0];
+    return [UIColor colorWithRed:0.25 green:0.08 blue:0.35 alpha:1.0];
 }
 
 + (BOOL)hb_invertedNavigationBar {
@@ -32,7 +32,7 @@
 -(void) viewWillAppear:(BOOL) animated{
     [super viewWillAppear:animated];
     if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad){
-        self.table.contentInset = UIEdgeInsetsMake(-15, 0, 0, 0);
+        self.table.contentInset = UIEdgeInsetsMake(-5, 0, 0, 0);
     }
     [self setupHeader];
     //[self setupTitle];
@@ -42,10 +42,10 @@
 -(void)setupTitle{
     UIImage *titleImage;
     if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_8_0) {
-        titleImage = [UIImage imageNamed:@"Icon/navBarIcon.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+        titleImage = [UIImage imageNamed:@"Icon/middleIcon.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
     }
     else {
-        titleImage = [UIImage imageNamed:@"Icon/navBarIcon.png" inBundle:[NSBundle bundleForClass:self.class]];
+        titleImage = [UIImage imageNamed:@"Icon/middleIcon.png" inBundle:[NSBundle bundleForClass:self.class]];
     }
     UIImageView *titleView = [[UIImageView alloc] initWithImage:titleImage];
     [self.navigationItem setTitleView:titleView];

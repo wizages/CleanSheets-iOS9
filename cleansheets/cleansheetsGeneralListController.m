@@ -9,11 +9,11 @@
 }
 
 + (UIColor *)hb_tintColor {
-    return [UIColor colorWithRed:0.17 green:0.24 blue:0.31 alpha:1.0];
+    return [UIColor colorWithRed:0.33 green:0.11 blue:0.45 alpha:1.0];
 }
 
 + (UIColor *)hb_navigationBarTintColor {
-    return [UIColor colorWithRed:0.17 green:0.24 blue:0.31 alpha:1.0];
+    return [UIColor colorWithRed:0.33 green:0.11 blue:0.45 alpha:1.0];
 }
 
 + (BOOL)hb_invertedNavigationBar {

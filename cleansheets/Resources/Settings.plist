@@ -11,6 +11,8 @@
 			<string>Settings</string>
 		</dict>
 		<dict>
+			<key>icon</key>
+			<string>Icon/hideSep.png</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
@@ -25,6 +27,8 @@
 			<string>com.dopeteam.cleansheets9/settingschanged</string>
 		</dict>
 		<dict>
+			<key>icon</key>
+			<string>Icon/tapClose.png</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
@@ -39,6 +43,8 @@
 			<string>com.dopeteam.cleansheets9/settingschanged</string>
 		</dict>
 		<dict>
+			<key>icon</key>
+			<string>Icon/corners.png</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
@@ -77,4 +83,3 @@
 	<string>Settings</string>
 </dict>
 </plist>
-

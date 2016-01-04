@@ -12,7 +12,7 @@
 		</dict>
 		<dict>
 			<key>icon</key>
-			<string></string>
+			<string>Icon/enabled.png</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
@@ -34,7 +34,7 @@
 		</dict>
 		<dict>
 			<key>icon</key>
-			<string></string>
+			<string>Icon/settings.png</string>
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>label</key>
@@ -50,7 +50,7 @@
 		</dict>
 		<dict>
 			<key>icon</key>
-			<string></string>
+			<string>Icon/makers.png</string>
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>label</key>
@@ -66,7 +66,7 @@
 		</dict>
 		<dict>
 			<key>icon</key>
-			<string></string>
+			<string>Icon/respring.png</string>
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>label</key>
@@ -82,7 +82,7 @@
 		</dict>
 		<dict>
 			<key>icon</key>
-			<string></string>
+			<string>Icon/contact.png</string>
 			<key>action</key>
 			<string>showSupportEmailController</string>
 			<key>cell</key>
@@ -96,7 +96,7 @@
 			<key>footerAlignment</key>
 			<integer>1</integer>
 			<key>footerText</key>
-			<string>© 2015 Wizages | Buzzeh</string>
+			<string>© 2016 DopeTeam</string>
 		</dict>
 	</array>
 </dict>
