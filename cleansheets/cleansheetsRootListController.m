@@ -35,17 +35,17 @@
         self.table.contentInset = UIEdgeInsetsMake(-5, 0, 0, 0);
     }
     [self setupHeader];
-    //[self setupTitle];
+    [self setupTitle];
 }
 
 
 -(void)setupTitle{
     UIImage *titleImage;
     if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_8_0) {
-        titleImage = [UIImage imageNamed:@"Icon/middleIcon.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+        titleImage = [[UIImage imageNamed:@"Icon/logo.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil] changeImageColor:[UIColor whiteColor]];
     }
     else {
-        titleImage = [UIImage imageNamed:@"Icon/middleIcon.png" inBundle:[NSBundle bundleForClass:self.class]];
+        titleImage = [[UIImage imageNamed:@"Icon/logo.png" inBundle:[NSBundle bundleForClass:self.class]] changeImageColor:[UIColor whiteColor]];
     }
     UIImageView *titleView = [[UIImageView alloc] initWithImage:titleImage];
     [self.navigationItem setTitleView:titleView];
