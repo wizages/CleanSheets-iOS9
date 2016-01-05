@@ -24,7 +24,7 @@
 			<key>label</key>
 			<string>Enabled</string>
 			<key>PostNotification</key>
-			<string>com.dopeteam.cleansheets9/settingschanged</string>
+			<string>com.dopeteam.cleansheets9/ReloadPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>

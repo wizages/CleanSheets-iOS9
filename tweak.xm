@@ -22,6 +22,10 @@ static BOOL customRadius = true;
 static BOOL tapDismiss = true;
 static CGFloat conRadius = 15.0f;
 
+#ifndef kCFCoreFoundationVersionNumber_iOS_9_0
+#define kCFCoreFoundationVersionNumber_iOS_9_0 1240.10
+#endif
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 * Hook into UIAlertController																			 		     *
 * Header url: https://github.com/nst/iOS-Runtime-Headers/blob/master/Frameworks/UIKit.framework/UIAlertController.h  *
@@ -76,7 +80,7 @@ static CGFloat conRadius = 15.0f;
 
 - (void)viewWillAppear:(BOOL)arg1{
 	%orig;
-	if (enabled && customRadius){
+	if (enabled && customRadius && kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_9_0){
 		for (UIView *subview in [self.view subviews])
 		{
 			for (UIView *subview2 in [subview subviews])
@@ -161,12 +165,10 @@ static void loadPrefs()
         [prefs registerBool:&tapDismiss default:true forKey:@"tapDismiss"];
         [prefs registerFloat:&conRadius default:15.0f forKey:@"radius"];
     }
-    [prefs release];
 }
 
 %ctor 
 {
-    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)loadPrefs, CFSTR("com.dopeteam.cleansheets9/settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
     loadPrefs();
 }
 

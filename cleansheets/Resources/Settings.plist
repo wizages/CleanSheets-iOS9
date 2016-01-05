@@ -24,7 +24,7 @@
 			<key>label</key>
 			<string>Hide Seperators</string>
 			<key>PostNotification</key>
-			<string>com.dopeteam.cleansheets9/settingschanged</string>
+			<string>com.dopeteam.cleansheets9/ReloadPrefs</string>
 		</dict>
 		<dict>
 			<key>icon</key>
@@ -40,7 +40,13 @@
 			<key>label</key>
 			<string>Tap to dismiss</string>
 			<key>PostNotification</key>
-			<string>com.dopeteam.cleansheets9/settingschanged</string>
+			<string>com.dopeteam.cleansheets9/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>iOS 9 Only</string>
 		</dict>
 		<dict>
 			<key>icon</key>
@@ -56,7 +62,7 @@
 			<key>label</key>
 			<string>Custom Corner Radius</string>
 			<key>PostNotification</key>
-			<string>com.dopeteam.cleansheets9/settingschanged</string>
+			<string>com.dopeteam.cleansheets9/ReloadPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -76,7 +82,7 @@
 			<key>max</key>
 			<real>100</real>
 			<key>PostNotification</key>
-			<string>com.dopeteam.cleansheets9/settingschanged</string>
+			<string>com.dopeteam.cleansheets9/ReloadPrefs</string>
 		</dict>
 	</array>
 	<key>title</key>
