@@ -1,3 +1,5 @@
+SDKVERSION = 10.1
+SYSROOT = $(THEOS)/sdks/iPhoneOS10.1.sdk
 SHARED_CFLAGS = -fobjc-arc
 include $(THEOS)/makefiles/common.mk
 

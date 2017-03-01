@@ -26,6 +26,10 @@ static CGFloat conRadius = 15.0f;
 #define kCFCoreFoundationVersionNumber_iOS_9_0 1240.10
 #endif
 
+#ifndef kCFCoreFoundationVersionNumber_iOS_10
+#define kCFCoreFoundationVersionNumber_iOS_10 1348.00
+#endif
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 * Hook into UIAlertController																			 		     *
 * Header url: https://github.com/nst/iOS-Runtime-Headers/blob/master/Frameworks/UIKit.framework/UIAlertController.h  *
@@ -149,7 +153,7 @@ static CGFloat conRadius = 15.0f;
 	CGFloat screenHeight = screenRect.size.height;
 	%orig;
 	NSString *bundleName = [[NSBundle mainBundle] bundleIdentifier];
-	if(enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]))
+	if(enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]) && kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_10)
 		self.view.frame = CGRectMake(self.view.frame.origin.x, (screenHeight-self.view.frame.size.height)/2 , screenWidth, self.view.frame.size.height);
 }
 %end
