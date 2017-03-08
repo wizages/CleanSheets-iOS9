@@ -82,30 +82,6 @@ static CGFloat conRadius = 15.0f;
 	}
 }
 
-- (void)viewWillAppear:(BOOL)arg1{
-	%orig;
-	if (enabled && customRadius && kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_9_0){
-		for (UIView *subview in [self.view subviews])
-		{
-			for (UIView *subview2 in [subview subviews])
-			{
-				[subview2.layer setCornerRadius:conRadius];
-					for (UIView *subview3 in [subview2 subviews])
-					{	
-						[subview3.layer setCornerRadius:conRadius];
-						for (UIView *subview4 in [subview3 subviews])
-						{
-							[subview4.layer setCornerRadius:conRadius];
-						}
-						
-					}
-			}
-		}
-	}
-	
-	
-}
-
 %end
 
 
@@ -125,6 +101,17 @@ static CGFloat conRadius = 15.0f;
 
 %end
 
+%hook UIInterfaceActionVisualStyle
+
+-(id)newActionSeparatorViewForGroupViewState:(id)arg1 {
+	if (enabled && seperators)
+		return nil;
+	else{
+		return %orig;
+	}
+}
+
+%end
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * Hook into UIActivityViewController																			 		   *
@@ -147,15 +134,27 @@ static CGFloat conRadius = 15.0f;
 - (void)viewDidLayoutSubviews
 {
 	
-	
 	CGRect screenRect = [[UIScreen mainScreen] bounds];
 	CGFloat screenWidth = screenRect.size.width;
-	CGFloat screenHeight = screenRect.size.height;
+	CGFloat screenHeight = screenRect.size.height;	
 	%orig;
 	NSString *bundleName = [[NSBundle mainBundle] bundleIdentifier];
 	if(enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]) && kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_10)
+	{
 		self.view.frame = CGRectMake(self.view.frame.origin.x, (screenHeight-self.view.frame.size.height)/2 , screenWidth, self.view.frame.size.height);
+	}
+	else if(enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]) && kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_10 && screenWidth < screenHeight){
+		bool just_one = false;
+		for (UIView *subview in [self.view.superview subviews]){
+			if (just_one == true){
+				subview.frame = CGRectMake(subview.frame.origin.x, subview.frame.origin.y-(screenHeight/3)/2, subview.frame.size.width, subview.frame.size.height);
+			}
+			just_one = true;
+		}
+	}
 }
+
+
 %end
 
 static void loadPrefs()

@@ -1,9 +1,9 @@
 Package: com.wizages.cleansheets
 Name: CleanSheets 2
-Depends: mobilesubstrate
-Version: 2.1.0~beta1
+Depends: mobilesubstrate, ws.hbang.common
+Version: 2.1.0~beta3
 Architecture: iphoneos-arm
 Description: Changes the action sheets to a alert popup and allows you to customize the alert.
-Maintainer: DopeTeam <dopeteam10@gmail.com>
-Author: DopeTeam <dopeteam10@gmail.com>
+Author: wizages <wizagesmax@gmail.com>
 Section: Tweaks
+Depiction: http://wizages.com/cydia/depictions/?dep=com.wizages.cleansheets

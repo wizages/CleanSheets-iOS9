@@ -46,7 +46,7 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>iOS 9 Only</string>
+			<string>iOS 9 Only (no iOS 10 Support)</string>
 		</dict>
 		<dict>
 			<key>icon</key>
