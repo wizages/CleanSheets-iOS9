@@ -21,6 +21,8 @@ static BOOL isActivity = false;
 static BOOL customRadius = true;
 static BOOL tapDismiss = true;
 static CGFloat conRadius = 15.0f;
+static BOOL themeActivity = true;
+static BOOL hideCancel = false;
 
 #ifndef kCFCoreFoundationVersionNumber_iOS_9_0
 #define kCFCoreFoundationVersionNumber_iOS_9_0 1240.10
@@ -53,7 +55,7 @@ static CGFloat conRadius = 15.0f;
 	  &&  [[[self.actions valueForKey:@"description"] componentsJoinedByString:@""] containsString:@"Cancel"] )
 	  )
 		return 0;
-	else if(enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]))
+	else if(enabled && (!([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]) || kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_10))
 		return 1;
 	else
 		return %orig;
@@ -99,6 +101,14 @@ static CGFloat conRadius = 15.0f;
 	}
 }
 
+-(BOOL)hideCancelAction:(id)arg1 inAlertController:(id)arg2{
+	if (enabled)
+		return hideCancel;
+	else{
+		return %orig;
+	}
+}
+
 %end
 
 %hook UIInterfaceActionVisualStyle
@@ -138,18 +148,29 @@ static CGFloat conRadius = 15.0f;
 	CGFloat screenWidth = screenRect.size.width;
 	CGFloat screenHeight = screenRect.size.height;	
 	%orig;
-	NSString *bundleName = [[NSBundle mainBundle] bundleIdentifier];
-	if(enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]) && kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_10)
-	{
-		self.view.frame = CGRectMake(self.view.frame.origin.x, (screenHeight-self.view.frame.size.height)/2 , screenWidth, self.view.frame.size.height);
-	}
-	else if(enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]) && kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_10 && screenWidth < screenHeight){
-		bool just_one = false;
-		for (UIView *subview in [self.view.superview subviews]){
-			if (just_one == true){
-				subview.frame = CGRectMake(subview.frame.origin.x, subview.frame.origin.y-(screenHeight/3)/2, subview.frame.size.width, subview.frame.size.height);
+	if (themeActivity){
+		NSString *bundleName = [[NSBundle mainBundle] bundleIdentifier];
+		if(enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]) && kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_10)
+		{
+			self.view.frame = CGRectMake(self.view.frame.origin.x, (screenHeight-self.view.frame.size.height)/2 , screenWidth, self.view.frame.size.height);
+		}
+		else if(enabled && !([bundleName isEqualToString:@"com.apple.mobileslideshow"] || [bundleName isEqualToString:@"com.apple.camera"]) && kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_10 && screenWidth < screenHeight){
+			int theming = 0;
+			for (UIView *subview in [self.view.superview subviews]){
+				theming++;
+				if(hideCancel){
+					if (theming == 2 || theming == 3){
+						subview.frame = CGRectMake(subview.frame.origin.x, subview.frame.origin.y-(screenHeight/9), subview.frame.size.width, subview.frame.size.height);
+					}
+					else if (theming == 4){
+						subview.frame = CGRectMake(subview.frame.origin.x,subview.frame.origin.y,0,0);
+					}
+				} else{
+					if (theming != 1){
+						subview.frame = CGRectMake(subview.frame.origin.x, subview.frame.origin.y-(screenHeight/3)/2, subview.frame.size.width, subview.frame.size.height);
+					}
+				}
 			}
-			just_one = true;
 		}
 	}
 }
@@ -167,6 +188,8 @@ static void loadPrefs()
         [prefs registerBool:&customRadius default:true forKey:@"customCorners"];
         [prefs registerBool:&tapDismiss default:true forKey:@"tapDismiss"];
         [prefs registerFloat:&conRadius default:15.0f forKey:@"radius"];
+        [prefs registerBool:&hideCancel default:false forKey:@"hideCancel"];
+        [prefs registerBool:&themeActivity default:true forKey:@"themeActivity"];
     }
 }
 

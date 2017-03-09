@@ -44,6 +44,34 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.dopeteam.cleansheets9</string>
+			<key>key</key>
+			<string>hideCancel</string>
+			<key>label</key>
+			<string>Hide Cancel Button</string>
+			<key>PostNotification</key>
+			<string>com.dopeteam.cleansheets9/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.dopeteam.cleansheets9</string>
+			<key>key</key>
+			<string>themeActivity</string>
+			<key>label</key>
+			<string>Theme Activity</string>
+			<key>PostNotification</key>
+			<string>com.dopeteam.cleansheets9/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>iOS 9 Only (no iOS 10 Support)</string>
