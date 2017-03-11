@@ -114,7 +114,8 @@ static BOOL hideCancel = false;
 %hook UIInterfaceActionVisualStyle
 
 -(id)newActionSeparatorViewForGroupViewState:(id)arg1 {
-	if (enabled && seperators)
+	NSString *bundleName = [[NSBundle mainBundle] bundleIdentifier];
+	if (enabled && seperators && ![bundleName isEqualToString:@"com.apple.Music"])
 		return nil;
 	else{
 		return %orig;
@@ -146,7 +147,7 @@ static BOOL hideCancel = false;
 	
 	CGRect screenRect = [[UIScreen mainScreen] bounds];
 	CGFloat screenWidth = screenRect.size.width;
-	CGFloat screenHeight = screenRect.size.height;	
+	CGFloat screenHeight = screenRect.size.height;
 	%orig;
 	if (themeActivity){
 		NSString *bundleName = [[NSBundle mainBundle] bundleIdentifier];
